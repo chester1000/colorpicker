@@ -113,12 +113,17 @@ public class ColorPickerPreference extends Preference {
 		colorIndicator.setImageDrawable(colorChoiceDrawable);
 	}
 
-	public void setValue(int value) {
+	public void setValue(int value, boolean placebo) {
 		if (callChangeListener(value)) {
 			selectedColor = value;
-			persistInt(value);
+			if (!placebo)
+				persistInt(value);
+
 			notifyChanged();
 		}
+	}
+	public void setValue(int value) {
+		setValue(value, false);
 	}
 
 	@Override
